@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
 import {GluestackUIProvider, Text} from '@gluestack-ui/themed';
 import {Provider, useSelector} from 'react-redux';
@@ -16,8 +9,19 @@ import {store} from './src/redux/store';
 import {config} from '@gluestack-ui/config';
 import HomeScreen from './src/screens/HomeScreen';
 import {useDispatch} from 'react-redux';
+import {movieApi} from './src/redux/api';
+import {ApiProvider} from '@reduxjs/toolkit/query/react';
+import MovieDetails from './src/screens/MovieDetails';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+export type RootStackParamList = {
+  Details: {
+    itemId: number;
+  };
+  Login: {};
+  Home: {};
+};
 
 function App() {
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -28,18 +32,30 @@ function App() {
       <NavigationContainer>
         <Stack.Navigator>
           {isAuthenticated ? (
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{
-                // eslint-disable-next-line react/no-unstable-nested-components
-                headerRight: () => (
-                  <Text size={'sm'} onPress={() => dispatch(logout())}>
-                    Logout
-                  </Text>
-                ),
-              }}
-            />
+            <>
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                  // eslint-disable-next-line react/no-unstable-nested-components
+                  headerRight: () => (
+                    <Text
+                      size={'sm'}
+                      color="blue"
+                      onPress={() => dispatch(logout())}>
+                      Logout
+                    </Text>
+                  ),
+                }}
+              />
+              <Stack.Screen
+                name="Details"
+                component={MovieDetails}
+                options={{
+                  headerBackTitle: 'Home',
+                }}
+              />
+            </>
           ) : (
             <Stack.Screen name="Login" component={LoginScreen} />
           )}
@@ -51,8 +67,10 @@ function App() {
 
 export default function AppWrapper() {
   return (
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ApiProvider api={movieApi}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ApiProvider>
   );
 }
