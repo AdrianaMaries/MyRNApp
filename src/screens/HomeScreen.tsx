@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import {Movie, useGetMoviesQuery} from '../redux/api';
-import {FlatList, RefreshControl, Spinner} from '@gluestack-ui/themed';
-import {Alert} from 'react-native';
+import {RefreshControl, Spinner} from '@gluestack-ui/themed';
+import {Alert, FlatList} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App';
 import {useState} from 'react';
@@ -18,16 +18,16 @@ export default function HomeScreen() {
 
   console.log(data);
 
-  if (!data) {
-    return null;
-  }
-
   if (isError) {
     Alert.alert('Something went wrong!');
   }
 
   if (isLoading) {
     return <Spinner size="large" />;
+  }
+
+  if (!data) {
+    return null;
   }
 
   const handleRefresh = () => {

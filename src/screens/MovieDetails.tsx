@@ -1,17 +1,9 @@
-import {
-  Avatar,
-  AvatarFallbackText,
-  Card,
-  Heading,
-  Image,
-  ScrollView,
-  Text,
-  View,
-} from '@gluestack-ui/themed';
+import {Card, Heading, Image, ScrollView, Text} from '@gluestack-ui/themed';
 import {useGetMovieByIdQuery} from '../redux/api';
 import React from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App';
+import {RatingItem} from '../component/RatingItem';
 
 export type MovieDetailsProps = NativeStackScreenProps<
   RootStackParamList,
@@ -96,47 +88,7 @@ export default function MovieDetails({route}: MovieDetailsProps) {
         </Text>
       </Card>
 
-      <Card p="$5" borderRadius="$lg" maxWidth={360} ml="$3" mr="$3" mb={16}>
-        <View flexDirection="row">
-          <View flex={3}>
-            <Text
-              fontSize="$md"
-              fontStyle="normal"
-              fontWeight="$bold"
-              lineHeight="$sm"
-              mb={12}
-              sx={{
-                color: '$textLight700',
-                _dark: {
-                  color: '$textDark200',
-                },
-              }}>
-              User{'\n'}Score
-            </Text>
-          </View>
-          <View flex={1}>
-            <Text
-              fontSize="$lg"
-              fontStyle="normal"
-              fontWeight="$bold"
-              lineHeight="$sm"
-              mt={12}
-              sx={{
-                color: '$textLight700',
-                _dark: {
-                  color: '$textDark200',
-                },
-              }}>
-              {data.vote_average * 10}
-            </Text>
-          </View>
-          <View flex={7}>
-            <Avatar bgColor="$amber600" size="md" borderRadius="$full">
-              <AvatarFallbackText>%</AvatarFallbackText>
-            </Avatar>
-          </View>
-        </View>
-      </Card>
+      <RatingItem voteAverage={data.vote_average} />
     </ScrollView>
   );
 }

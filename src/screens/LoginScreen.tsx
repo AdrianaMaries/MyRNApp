@@ -1,5 +1,4 @@
 import {Button, ImageBackground, Text} from '@gluestack-ui/themed';
-
 import {ButtonText, Box, ScrollView} from '@gluestack-ui/themed';
 import {Alert, View} from 'react-native';
 import {useDispatch} from 'react-redux';
@@ -27,11 +26,9 @@ function LoginScreen() {
 
   const onSubmit = (data: {username: string; password: string}) => {
     if (data.username === defaultUsername && data.password === defaultPass) {
-      console.log('onlogin' + data.username);
       dispatch(login());
     } else {
-      console.log('dataaa' + data.username);
-      Alert.alert('Error', 'Incorrect username or password');
+      Alert.alert('Error', 'Incorrect username or password!');
     }
   };
   const image = {
