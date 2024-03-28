@@ -114,12 +114,7 @@ export default function MovieDetails({route}: MovieDetailsProps) {
               User{'\n'}Score
             </Text>
           </View>
-          <View flex={2}>
-            <Avatar bgColor="$amber600" size="md" borderRadius="$full">
-              <AvatarFallbackText>%</AvatarFallbackText>
-            </Avatar>
-          </View>
-          <View flex={7}>
+          <View flex={1}>
             <Text
               fontSize="$lg"
               fontStyle="normal"
@@ -134,6 +129,11 @@ export default function MovieDetails({route}: MovieDetailsProps) {
               }}>
               {data.vote_average * 10}
             </Text>
+          </View>
+          <View flex={7}>
+            <Avatar bgColor="$amber600" size="md" borderRadius="$full">
+              <AvatarFallbackText>%</AvatarFallbackText>
+            </Avatar>
           </View>
         </View>
       </Card>
