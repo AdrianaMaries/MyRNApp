@@ -1,29 +1,24 @@
-import {configureStore} from '@reduxjs/toolkit';
-import authReducer from './authSlice';
-import {movieApi} from './api';
-import {combineReducers} from 'redux';
 import {
-  persistStore,
-  persistReducer,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
   PURGE,
   REGISTER,
+  REHYDRATE,
+  persistReducer,
+  persistStore,
 } from 'redux-persist';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {configureStore} from '@reduxjs/toolkit';
+import {movieApi} from './api';
+import {rootReducer} from './reducers';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   whitelist: ['auth'],
 };
-
-const rootReducer = combineReducers({
-  auth: authReducer,
-  [movieApi.reducerPath]: movieApi.reducer,
-});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
