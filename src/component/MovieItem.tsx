@@ -40,7 +40,7 @@ export default function MovieItem({
           $xs-borderRadius="$md"
           alt="movieImage"
           source={{
-            uri: 'https://image.tmdb.org/t/p/w1280/' + poster_path,
+            uri: 'https://image.tmdb.org/t/p/w1280' + poster_path,
           }}
         />
         <Heading size="md" fontFamily="$heading" mb="$4">

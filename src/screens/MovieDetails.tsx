@@ -1,9 +1,9 @@
 import {Card, Heading, Image, ScrollView, Text} from '@gluestack-ui/themed';
-import {useGetMovieByIdQuery} from '../redux/api';
-import React from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../App';
+import React from 'react';
 import {RatingItem} from '../component/RatingItem';
+import {RootStackParamList} from '../component/RootNavigator';
+import {useGetMovieByIdQuery} from '../redux/api';
 
 export type MovieDetailsProps = NativeStackScreenProps<
   RootStackParamList,
